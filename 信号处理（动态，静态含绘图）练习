@@ -1,0 +1,110 @@
+%参数设定
+Fs = 100; 
+f = 10;
+A = 1;
+T = 4/f;  
+N = 35;  
+
+% 生成时间向量  
+t = 0:1/Fs:(N-1)/Fs;  
+x = A * sin(2 * pi * f * t);  
+
+% 进行快速fft及相应分析  
+Y = fft(x);  
+f_axis = (0:N/2) * (Fs/N); 
+
+% 计算频谱密度  
+P2 = abs(Y / N);  
+P1 = P2(1:N/2+1);  
+P1(2:end-1) = 2 * P1(2:end-1); 
+% 计算相位  
+phase = angle(Y);  
+phase = phase(1:N/2+1);  
+
+figure;  
+
+% 绘制幅频特性图  
+yyaxis left 
+stem(f_axis, P1,'filled');  
+hold on;  
+xlabel('谐波频率 (Hz)');  
+ylabel('幅值');
+grid on;
+legend('幅值', '基频');
+xlim([0 Fs/2]); 
+
+% 添加第二个x轴，位于顶部
+ax = gca; % 获取句柄
+position = ax.Position; 
+ax2 = axes('Position', position, 'XAxisLocation', 'top', 'YAxisLocation', 'right', ...
+           'Color', 'none', 'XColor', 'k', 'YColor', 'none'); 
+linkaxes([ax, ax2], 'x'); % 
+
+% 第二个坐标轴设置
+t_x_axis_values = 1:5; 
+f_x_axis_values = 10:10:50; % 第一个x轴的值，与第二个x轴值对应的点
+set(ax2, 'XTick', f_x_axis_values, 'XTickLabel', num2str(t_x_axis_values')); 
+xlabel(ax2, '谐波次数 (k)'); 
+set(ax2, 'YTick', []); % 隐藏y轴
+
+% 绘制相频特性图
+yyaxis right 
+plot(f_axis, phase, 'b'); 
+hold on; 
+scatter(f_axis, phase, 'r', 'filled'); % 强调采样点 
+ylabel('相位 (弧度)');   
+grid on;  
+legend('相位', '基频');
+图六 幅频特性及相频特性图
+% 设置参数  
+Fs = 100;  
+f = 10;
+A = 1;   
+T = 4/f; 
+N = 35; 
+t = 0:1/Fs:(N-1)/Fs;  
+   
+% 生成正弦信号  
+x = A * sin(2 * pi * f * t);  
+  
+% 计算FFT  
+Y = fft(x);  
+f_axis= (0:N-1) * (Fs/N);  %计算频率轴
+
+% 计算频谱密度  
+P = abs(Y / N); 
+
+% 计算相位  
+phase = angle(Y);  
+
+% 绘制频谱图  
+figure;  
+yyaxis left
+stem(f_axis, P, 'filled');  
+hold on;
+xlabel('谐波频率 (Hz)');  
+ylabel('频谱密度');  
+legend('频谱密度', '基频');
+grid on;  
+xlim([0 Fs]); %0 限制x轴范围
+% 绘制相频特性图
+yyaxis right 
+plot(f_axis, phase, 'b'); % 绘制
+hold on; 
+scatter(f_axis, phase, 'r', 'filled'); % 强调采样点 
+ylabel('相位 (弧度)');   
+grid on;  
+legend('相位', '基频');
+
+ax = gca; % 获取句柄
+position = ax.Position;
+ax2 = axes('Position', position, 'XAxisLocation', 'top', 'YAxisLocation', 'right', ...
+           'Color', 'none', 'XColor', 'k', 'YColor', 'none');
+linkaxes([ax, ax2], 'x'); 
+
+% 设置第二个x轴
+second_x_axis_values = 0:10;
+first_x_axis_values = 0:10:100; 
+set(ax2, 'XTick', first_x_axis_values, 'XTickLabel', num2str(second_x_axis_values'));
+xlabel(ax2, '谐波次数 (k)'); 
+set(ax2, 'YTick', []);%隐藏y轴 
