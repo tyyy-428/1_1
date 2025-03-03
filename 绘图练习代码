@@ -1,0 +1,51 @@
+（6）
+syms f(x) 
+eq1=diff(f,x,2)-3*diff(f,x)+2*f(x)==1
+Df=diff(f,x);
+cond=[f(0)==1,Df(0)==sym(0)]
+y=dsolve(eq1,cond)
+F=subs(y, x, 0.5)
+ 
+（14）
+figure
+N=100;p=0.157;
+k=0:N;
+pdf = binopdf(k,N,p);
+cdf = binocdf(k,N,p);
+yyaxis left
+hb= plot(k,pdf, 'Linewidth',2 ,'Marker','.','MarkerSize',15);
+ylim([0,0.1])
+ylabel('pdf 概率','Color',hp.Color)
+yyaxis right
+hc=plot(k,cdf,'Marker','o','Markersize',5);
+ylim([o,1])
+ylabel('cdf 累计概率','Color',hc.Color)
+grid on,grid('minor')
+xlabel('k')
+title('二项分布的概率 pdf 和累计概率 cdf 特性曲线')
+legend('pdf','cdf','Location','Northwest') 
+ 
+
+（18）
+years = 1980:2020; 
+values = rand(1, 41);
+mean_year = mean(years);
+years_centered = years - mean_year;
+p2 = polyfit(years_centered, values, 2);
+p3 = polyfit(years_centered, values, 3);
+p4 = polyfit(years_centered, values, 4);
+x = 1980:2035;
+y2 = polyval(p2, x - mean_year);
+y3 = polyval(p3, x - mean_year);
+y4 = polyval(p4, x - mean_year);
+plot(years, values, 'ko', 'MarkerFaceColor', 'k');
+hold on;
+plot(x, y2, 'b-', 'LineWidth', 2); % 二阶拟合曲线
+plot(x, y3, 'r--', 'LineWidth', 2); % 三阶拟合曲线
+plot(x, y4, 'g:', 'LineWidth', 2); % 四阶拟合曲线
+legend('Data Points', '2nd Degree Polynomial', '3rd Degree Polynomial', '4th Degree Polynomial');
+title('Polynomial Fits to Centered Year Data');
+xlabel('Year');
+ylabel('Value');
+grid on;
+hold off;
