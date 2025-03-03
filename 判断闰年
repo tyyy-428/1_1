@@ -1,0 +1,34 @@
+#include <stdio.h>
+int main()
+{
+    int year;
+    int m;
+    printf("请输入一个年份：");
+    m = scanf("%d",&year);
+    if(m > 0)
+    {
+        if(!(year % 100))//判断是否是整百年
+        {
+            if(!(year % 400))
+                printf( "%d是闰年",year);
+            else
+            {
+                printf("%d不是闰年",year);
+            }
+        }
+        else
+        {
+            if(!(year % 4))
+                printf("%d是闰年",year);
+            else
+            {
+                printf("%d不是闰年",year);
+            }
+        }
+    }
+    else
+    {
+        printf("输入的根本就不是年份");
+    }
+    return 0;
+}
