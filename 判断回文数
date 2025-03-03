@@ -1,0 +1,40 @@
+#include<stdio.h>
+int main()
+{
+    int num;
+    int m;
+    int arr[5];
+    printf("请输入一个五位数：");
+    m = scanf("%d",&num);
+    if(m > 0)
+    {
+        
+        if(num < 10000 || num > 99999)
+        {
+            printf("不是五位数 bye！");
+        }
+        else
+        {
+            //num是五位数 1 2 3 2 1
+            for(int i = 0;i < 5;i++)
+            {
+                arr[i] = num % 10;
+                num = num / 10;
+            }
+            if(arr[4] == arr[0] && arr[3] == arr[1])
+            {
+                printf("输入是回文数");
+            }
+            else
+            {
+                printf("输入不是回文数");
+            }
+        }
+    }
+    else
+    {
+        printf("输入的根本就不是数字");
+    }
+    
+    return 0;
+}
