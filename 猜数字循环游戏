@@ -1,0 +1,107 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<time.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+int main() {
+	srand(time(0));
+	int i = 1, num1 = 0,num2=0,count1=0,count2=0,score=0;
+	double a, b, result, put;
+	while(i <= 5) {
+		a = rand() % 100 + 1;
+		b = rand() % 100 + 1;
+		switch (rand() % 4) {
+		case 0:
+			printf("%lf+%lf=", a, b);
+			result = a + b;
+			scanf("%lf", &put);//TODO
+			if (fabs(result - put) < 1e-3) {
+				printf("回答正确！\n");
+				score = score + 20;
+				num1++;
+				num2 = 0;
+				count1++;
+				//TODO
+			}
+			else {
+				num1 = 0;
+				num2++;
+				printf("很遗憾，回答错误\n");
+				count2++;
+			}//TODO
+			break;
+		case 1:
+			printf("%lf-%lf=", a, b);
+			result = a - b;
+			scanf("%lf", &put);//TODO
+			if (fabs(result - put) < 1e-3) {
+				printf("回答正确！\n");
+				score = score + 20;
+				count1++;
+				num1++;
+				num2 = 0;
+				//TODO
+			}
+			else {
+				num1 = 0;
+				num2++;
+				printf("很遗憾，回答错误\n");
+				count2++;
+			}//TODO
+			break;
+		case 2:
+			printf("%lf*%lf=", a, b);
+			result = a * b;
+			scanf("%lf", &put);//TODO
+			if (fabs(result - put) < 1e-3) {
+				printf("回答正确！\n");
+				score = score + 20;
+				count1++;
+				num1++;
+				num2 = 0;
+				//TODO
+			}
+			else
+			{
+				num1 = 0;
+				num2++;
+				printf("很遗憾，回答错误\n");
+				count2++;
+			}//TODO
+			break;
+		case 3:
+			printf("%lf/%lf=", a, b);
+			result = a / b;
+			scanf("%lf", &put);//TODO
+			if (fabs(result - put) < 1e-3) {
+				printf("回答正确！\n");
+				score = score + 20;
+				count1++;
+				num1++;
+				num2 = 0;
+				//TODO
+			}
+			else
+			{
+				num2++;
+				num1 = 0;
+				printf("很遗憾，回答错误\n");
+				count2++;
+				//TODO
+			}
+			break;
+		}
+		i++;
+		if (num1 == 3) {
+			printf("excellent！\n");
+		}
+		if (num2 == 3) {
+			break;
+		}
+		
+	}
+	printf("您的最终得分为%d\n", score);
+	printf("您答对了%d道题，答错了%d道题", count1, count2);
+
+	return 0;
+}
