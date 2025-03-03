@@ -1,0 +1,135 @@
+syms x y
+y=abs(sin(x))
+E1=diff(y)
+E2=limit(y,x,0,'left')
+E3=limit(y,x,pi/2)
+ 
+4、 
+clear all
+syms h(t) u(t) s
+h(t)=exp(-3*t);
+u(t)=cos(t);
+h(s)=laplace(h(t),t,s);
+u(s)=laplace(u(t),t,s);
+y(s)=h(s)*u(s)
+ 
+5、
+syms t s alpha A
+f=A*exp(-alpha*abs(t))
+F=fourier(f)
+  
+6、 
+clear all
+syms s t;
+F=(s+3)/(s^3+3*s^2+6*s+4);
+f=ilaplace(F);
+disp(f);
+
+6、 
+x=-3*pi:pi/15:3*pi;
+y=x;
+[X,Y]=meshgrid(x,y);
+Z=sin(x).*sin(Y)./x./Y
+N=Z<=0
+M=Z>0
+a=numel(Z)
+b=sum(N(:))
+c=sum(M(:))
+d=a-b-c
+ 
+
+x=-3*pi:pi/15:3*pi;
+y=x;
+[X,Y]=meshgrid(x,y);
+XX=X+(X==0)*eps;
+YY=Y+(Y==0)*eps;
+ZZ=sin(XX).*sin(YY)./XX./YY;
+surf(XX,YY,ZZ),shading interp
+ 
+
+t=linspace(0,10);
+y=sin(t);
+figure;
+hold on;
+box on;
+plot(t,y,'k:');
+y(find(y<0))=0;
+y(find(y>(sqrt(3)/2)))=sqrt(3)/2
+plot(t, y, 'b-');
+
+2、
+a = linspace(0, 2*pi, 1000); 
+R = 1 - cos(a);  
+x = R .* cos(a);  
+y = R .* sin(a);  
+figure; 
+plot(x, y, 'b-', 'LineWidth', 1); 
+axis equal;   
+title('心脏线'); 
+xlabel('X');   
+ylabel('Y');  
+grid on; 
+ 
+3、
+a = 4;  
+b = 2;  
+t = 0:0.01:2*pi;   
+x = a * cos(t);  
+y = b * sin(t);   
+plot(x, y, 'r-.'); 
+title('椭圆');  
+xlabel('x');  
+ylabel('y');    
+grid on; 
+axis equal; 
+ 
+4、
+clear all
+t = (0:0.05:18)';  
+N = length(t);  
+zeta = 0.2:0.2:1.4;  
+L = length(zeta);  
+y = zeros(N, L);
+hold on  
+for k = 1:L  
+    zk = zeta(k);  
+    if zk < 1  
+        beta = sqrt(1 - zk^2);  
+        y(:,k) = 1/beta * exp(-zk*t) .* sin(beta*t);  
+        plot(t, y(:,k), 'b-')  
+    elseif zk == 1  
+        y(:,k) = t .* exp(-t);  
+        plot(t, y(:,k), 'k-', 'LineWidth', 2) % 粗黑线
+        hold on;
+    else  
+        beta = sqrt(zk^2 - 1);  
+        y(:,k) = (exp(-(zk-beta)*t) - exp(-(zk+beta)*t)) ./ (2*beta);  
+        plot(t, y(:,k), 'r-')  
+    end  
+end 
+if any(zeta == 0.2)  
+    text(2.2, 0.63, '\zeta = 0.2')  
+end  
+if any(zeta == 1.4)  
+    text(0.3, 0.14, '\zeta = 1.4')  
+end  
+text(10, 0.7, '\Delta\zeta = 0.2')  
+  
+axis([0, 18, -0.4, 0.8])  
+hold off  
+box on  
+grid on
+ 
+
+5、
+[x, y] = meshgrid(-1:0.1:1, -1:0.1:1);  
+r_squared = x.^2 + y.^2;   
+z = NaN(size(x));
+idx = r_squared <= 1; 
+z(idx) = 8*y(idx).*x(idx).^3 + 8*x(idx).^8.*y(idx).^3 - 6*x(idx).*y(idx);  
+figure;  
+surf(x, y, z);  
+xlabel('x');  
+ylabel('y');  
+zlabel('z');  
+title('三维曲面 z = 8yx^3 + 8x*y^3 - 6xy');
