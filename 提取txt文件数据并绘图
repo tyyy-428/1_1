@@ -1,0 +1,26 @@
+folderPath = uigetdir; 
+files = dir(fullfile(folderPath, '*.txt'))；
+dataTable = table;  
+for i = 1:length(files)
+    filename = fullfile(folderPath, files(i).name);
+    data = readmatrix(filename);  
+    data = array2table(data);     
+    % 假设第一列为 x 值，第二列为 y 值
+    data.Properties.VariableNames = {'x', 'y'};  
+    % 将当前文件数据追加到总表格中
+    if isempty(dataTable)
+        dataTable = data;
+    else
+        dataTable = [dataTable; data];
+    end
+end
+% 提取 x 和 y 数据
+x = dataTable.x;
+y = dataTable.y;
+% 绘制图形
+figure; % 创建一个新的图形窗口  
+plot(dataTable.x, dataTable.y); % 使用线和点标记绘制数据  
+title('合并后的txt文件数据');  
+xlabel('X轴');  
+ylabel('Y轴');  
+grid on;
