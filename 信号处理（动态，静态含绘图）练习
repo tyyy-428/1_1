@@ -55,7 +55,7 @@ scatter(f_axis, phase, 'r', 'filled'); % 强调采样点
 ylabel('相位 (弧度)');   
 grid on;  
 legend('相位', '基频');
-图六 幅频特性及相频特性图
+
 % 设置参数  
 Fs = 100;  
 f = 10;
